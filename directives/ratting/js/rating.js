@@ -6,10 +6,13 @@
             restrict: 'A',
             templateUrl:'rate-template.html',
             scope:{
-
+            	max:'='
             },
             link: function(scope, elem, attrs) {
-                //console.log("Recognized the fundoo-rating directive usage");
+            	scope.stars = [];
+            	for(var i=0;i < scope.max; i++){
+            		scope.stars.push({});
+            	}
             }
         };
     });
