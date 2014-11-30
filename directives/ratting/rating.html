@@ -4,11 +4,32 @@
         <title>Test</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        <style>
+        .rating{
+            color: #a9a9a9;
+            margin: 0;
+            padding: 0;
+        }
+        ul.rating {
+            display: inline-block;
+        }
+        .rating li {
+            list-style-type: none;
+            display: inline-block;
+            padding: 1px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .rating .filled {
+            color: #21568b;
+        }
+        </style>
     </head>
     <body>
-        <div ng-app="rateApp">
-            <div rating max="10"></div>
+        <div ng-app="rateApp" ng-controller="ratingCrtl">
+            Current Rating : {{rating}} <br>
+            <div rating rating-value="rating" max="10" on-rating="onRating(rating)"></div>
         </div>
         <!-- Scripts -->
         <script src="js/plugin/jquery.min.js"></script>
