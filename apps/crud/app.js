@@ -5,8 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var engine = require('ejs-mate');
-var connection  = require('express-myconnection');
-var mysql = require('mysql');
+//var connection  = require('express-myconnection');
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -33,15 +33,16 @@ app.use(express.static(path.join(__dirname, 'public')));
     connection peer, register as middleware
     type koneksi : single,pool and request
 -------------------------------------------*/
-app.use(
+/*app.use(
     connection(mysql,{
         host: 'localhost',
         user: 'root',
         password : '',
         port : 3306, //port mysql
-        database:'expressdemo'
+        database:'expressdemo',
+        multipleStatements:true
     },'request')
-);
+);*/
 
 app.use('/', routes);
 app.use('/users', users);
