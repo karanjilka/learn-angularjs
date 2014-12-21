@@ -10,10 +10,10 @@ router.get('/', function(req, res) {
 	//var pagination = require('.././lib/pagination');
 	//var result = pagination.get({page:2, links:5, rows: 5, total: 50});
 	var studentModel = require('.././models/studentModel');
-	studentModel.listAll(function(page,limit){
+	studentModel.listAll(page,limit,function(err,result){
 		res.send(result);
+		//res.render('students/index',{title: 'Studnets',total:result[0],rows:result[1]});
 	});
-    //res.render('students/index',{title: 'Studnets',total:result[0],rows:result[1]});
 });
 
 /* GET students listing. */

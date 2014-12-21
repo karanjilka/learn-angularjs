@@ -1,17 +1,25 @@
 var db = require('.././lib/database');
 var studentModel = {};
 
-studentModel.listAll = function (page,limit) {
-	var output = null;
+studentModel.listAll = function (page,limit,callback) {
 	db.getConnection(function(err,connection){
-		var sql = 'SELECT COUNT(*) AS cnt FROM students;';
-		sql += 'SELECT * FROM students LIMIT '+page+','+limit+'';
 
-	    connection.query(sql,function(err,result){
-	        if(err)
-	        console.log("Error Selecting : %s ",err );
+		var sql = 'SELECT COUNT(*) AS cnt FROM students';
+	    connection.query(sql,function(err,data){
 
-	    	return result;
+	    	var result = {};
+	    	result['total']=data[0].cnt;
+	    	var sql = 'SELECT * FROM students LIMIT '+page+','+limit+'';
+			connection.query(sql,function(err,data){
+				if(err){
+					connection.release();
+	        		callback(err,null);
+		        }else{
+		        	connection.release();
+		        	result['rows']=data;
+		        	callback(null,result);
+		        }
+			});
 	    });
     });
 };
